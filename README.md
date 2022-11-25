@@ -5,7 +5,14 @@
 ## Web Client
 Implemented as a pair.
 - Language: JavaScript, Node.js
+- web-app framework: react.js
+- UI Framework: Ant Design
 Description: Takes ... and ...
+### Getting Started
+1. Ensure you have the latest version of Node.js and npm installed. The nvm tool can be used to manage your Node.js version. `npm update` and `npm install -g npm` can then be run to update npm's local package database and bring the package manager up to date.
+2. `cd` into the `wc` directory.
+3. run `npm start` to install necessary project dependencies and start the local development server on port 3000.
+
 
 ## Individual Web Service 1
 Implemented by sc20tvm
