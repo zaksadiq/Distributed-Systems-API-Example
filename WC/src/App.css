@@ -1,0 +1,89 @@
+.App {
+  display: grid;
+  padding: 50px;
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  animation: a 16s ease-in-out 0s infinite;
+  /* border: 1px solid #fff020; */
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
+  margin: 0 auto;
+  /* max-height: 60vh; */
+  max-width: 60vw;
+  min-height: 60vh;
+  padding: 50px;
+  /* padding-bottom: 0; */
+  /* transition: box-shadow 1s ease-in-out; */
+  /* transition: background-color 1s ease-in-out; */
+  width: 750px;
+}
+@keyframes a {
+  0% { box-shadow: 0 0 0px 0vw #f8fff0; }
+  10% { box-shadow: 0 0 0px 100vw aliceblue; }
+  20% { box-shadow: 0 0 0px 5vw #f8fff0; }
+  30% { box-shadow: 0 0 0px 100vw aliceblue; }
+  40% { box-shadow: 0 0 0px 0vw #f8fff0; }
+  50% { box-shadow: 0 0 0px 100vw aliceblue; }
+  60% { box-shadow: 0 0 0px 11vw #f8fff0; }
+  70% { box-shadow: 0 0 0px 100vw aliceblue; }
+  80% { box-shadow: 0 0 0px 5vw #f8fff0; }
+  90% { box-shadow: 0 0 0px 100vw aliceblue; }
+  100% { box-shadow: 0 0 0px 0vw #f8fff0; }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.spin {
+  animation-name: App-logo-spin;
+  animation-duration: 1s;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1 {
+  /* -webkit-text-stroke: 0.2px #222; */
+  /* background-color: black; */
+}
+.content-box {
+  /* background-color: rgba(0, 0, 0, 1); */
+  /* background-color: rgba(0, 0, 0, 0.01); */
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  box-shadow: 0px 0px 25px 3px lightgoldenrodyellow inset;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 300px;
+  margin: 0 auto;
+  max-height: 300px;
+  min-height: 15px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 80%;
+}
+.small-text {
+  color: rgba(0,0,0,0.40);
+  font-family: monospace;
+  font-size: 15px;
+}
+.theme-info {
+  padding: 35px 0 20px 0;
+  margin-bottom: 0;
+}
