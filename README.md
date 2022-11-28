@@ -23,7 +23,14 @@ Description: Takes ... and ...
 ## Individual Web Service 2
 Implmemented by sc18zp
 - Language: Node.js, Javascript
+
 Description: Takes ... and ...
+### End-points
+| Routes      | HTTP Methods | Description                                        |
+|-------------|--------------|----------------------------------------------------|
+| /           | GET          | Returns a JSON object of 'Hello World'.            |
+| /edgeDetect | POST         | Upload an image for the purpose of edge detection. |
+|             | GET          | Get an image possible                              |
 
 
 ## Web Service 3

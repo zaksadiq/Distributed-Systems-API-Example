@@ -1,0 +1,22 @@
+{
+  "name": "ws2",
+  "version": "1.0.0",
+  "description": "web service 2 for distributed systems coursework 2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/zaksadiq/distributed-systems-cw2/"
+  },
+  "author": "zak sadiq",
+  "license": "ISC",
+  "dependencies": {
+    "canny-edge-detector": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
