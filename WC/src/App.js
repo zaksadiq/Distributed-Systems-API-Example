@@ -3,11 +3,13 @@ import './App.css';
 
 import { Alert, Button, ConfigProvider, Divider, message, Spin, Steps } from 'antd';
 import LogsContainer from './ConsoleContainer.js';
+import Buffer from 'buffer'
 
 function App({themeColour, themeTime, easeRatio}) {
 
   // store loading value
   const [loading, setLoading] = useState(false);
+  const [ws1Image, setWs1Image] = useState(undefined);
 
 
   // Button Handlers:
@@ -23,25 +25,32 @@ function App({themeColour, themeTime, easeRatio}) {
     setLoading(true);
     stepsHeaderSetDescriptions([<>Working..</>, stepsHeaderDescriptions[1], stepsHeaderDescriptions[2]])
     stepsHeaderSetSubTitles([<><Spin/></>, stepsHeaderSubTitles[1], stepsHeaderSubTitles[2]])
-    const url = 'http://localhost:3001/edgedetect';
+    const url = 'http://127.0.0.1:5004/random';
     console.log('Starting fetch from ' + url);
     fetch(url)
       .then( response => {
+        console.log('io');
+        console.log(response);
         if (response.ok) {
           console.log(response + ' received.');
+          console.log(response);
           return response.json();
         }
         throw response;
       })
       .then(data => {
-        // console.log('data:');
-        console.log(data);
+        //console.log(JSON.stringify(data));
+        console.log('jjhhjjj');
+        setWs1Image('data:image/png;base64,'+data.encoded_picture);
+        //console.log(data.encoded_picture);
+        // Buffer.from(data, 'base64').toString();
         stepsHeaderSetStati(['finish', stepsHeaderStati[1], stepsHeaderStati[2]]);
         stepsHeaderSetSubTitles([<>Success.</>, stepsHeaderSubTitles[1], stepsHeaderSubTitles[2]])
         stepsHeaderSetDescriptions([
         <>
         <p>Response data:</p>
         <p>{JSON.stringify(data)}</p>
+        <img src={ws1Image} />
         </>, stepsHeaderDescriptions[1], stepsHeaderDescriptions[2]])
         stepsHeaderSetDisabled([false, false, true]);
       })
@@ -185,7 +194,9 @@ function App({themeColour, themeTime, easeRatio}) {
               {!loading ?
                 (
                   <>
+                    {/*decoded image*/}
                     <Button onClick={fetchButtonHandler}>Fetch.</Button>
+                    <img src={ws1Image} />
                     <p class="small-text">WS{currentStep+1}</p>
                   </>
                 )
