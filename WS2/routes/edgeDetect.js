@@ -21,13 +21,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // Carry out image upload
 // const uploadImage = () => {
-//   return upload.single('image');
+//   upload.single('image');
 // }
 
 
 router.get('/', (req, res) => {
   res.send('Hello World');
-})
+});
 router.get('/edgedetect', controller.get);
 router.post('/edgedetect', upload.single("image"), (res, req, imageID) => { console.log(req.body); ++imageID; controller.post(res, req); } );
 // router.post('/edgedetect', upload.single('image'), (res, req) => { console.log('mm'); ++imageID; controller.post(res, req); } );
