@@ -1,6 +1,5 @@
-import { useEffect, useState, useReducer } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-
 import { Alert, Button, ConfigProvider, Divider, message, Spin, Steps } from 'antd';
 import LogsContainer from './ConsoleContainer.js';
 
@@ -8,7 +7,6 @@ import LogsContainer from './ConsoleContainer.js';
 import { FormData, Blob } from 'formdata-node';
 import axios from 'axios';
 import { Buffer } from 'buffer';
-// const { Buffer } = require('buffer');
 
 
 function App({themeColour, themeTime, easeRatio}) {
@@ -18,50 +16,107 @@ function App({themeColour, themeTime, easeRatio}) {
   // Store WS1 Image value in state for dynamic front-end.
   const [imageResultArray, setImageResultArray] = useState(['', '', '']);
 
-
- // Adapted from https://gist.github.com/emindeniz99/0b415de896f5c335d253d870116d798f
- const postBase64AsFormData = async (base64, url) => {
-
-   console.log('Creating formdata object');
-   let formData = new FormData();
-   console.log('Reading base64 encoding to buffer');
-  //  console.log(`base64: ${base64}`);
-   console.log(`destination url: ${url}`);
-   console.log('converting base64 to blob');
-  const base64Response = await fetch(`data:image/jpg;base64,${base64}`);
-  const base64Blob = await base64Response.blob();
-  //  base64ToBlob = (base64, type = 'application/octet-stream') => fetch(base64ToBlob)
-  //    .then( res => res.blob() )
-  //    .then( res => console.log(res) );
-   //   buffer to form/data, https://stackoverflow.com/questions/43913650/how-to-send-a-buffer-in-form-data-to-signserver
-   console.log('Appending base64 to formdata');
-   // Turn buffer into blob
-  //  formData.append('file', Buffer.from(base64Blob), 'coursework.jpg');
-   formData.append('image', base64Blob, 'coursework.jpg');
-   console.log('Beginning post request using Axios');
-   return await axios({
-     method: 'post',
-     url: url,
-     data: formData,
-     headers: { 'Content-Type': 'multipart/form-data' },
-   })
-   .then( res => {
-     console.log('Successful response.');
-     console.log(`statusCode: ${res.statusCode}`);
-     console.log(res.data);
-     return res.data.image;
-   })
-   .catch( error => {
-     console.log('Something went wrong.');
-     console.error(error);
-     stepsHeaderSetStati([stepsHeaderStati[0], 'error', stepsHeaderStati[2]]);
-     stepsHeaderSetSubTitles([stepsHeaderSubTitles[0], <>Error.</>, stepsHeaderSubTitles[2]])
-     stepsHeaderSetDescriptions([stepsHeaderDescriptions[0], <>Response error.<br />{error.message}</>, stepsHeaderDescriptions[2]])
-   });
- }
+  // TODO: Abstract common functionality of these functions.
+  //
+  const postBase64AsFormData = async (base64, url) => {
+    console.log('Creating formdata object');
+    let formData = new FormData();
+    console.log('Reading base64 encoding to buffer');
+    //  console.log(`base64: ${base64}`);
+    console.log(`destination url: ${url}`);
+    console.log('converting base64 to blob');
+    const base64Response = await fetch(`data:image/jpg;base64,${base64}`);
+    const base64Blob = await base64Response.blob();
+    //  base64ToBlob = (base64, type = 'application/octet-stream') => fetch(base64ToBlob)
+    //    .then( res => res.blob() )
+    //    .then( res => console.log(res) );
+    //   buffer to form/data, https://stackoverflow.com/questions/43913650/how-to-send-a-buffer-in-form-data-to-signserver
+    console.log('Appending base64 to formdata');
+    // Turn buffer into blob
+    //  formData.append('file', Buffer.from(base64Blob), 'coursework.jpg');
+    formData.append('image', base64Blob, 'coursework.jpg');
+    console.log('Beginning post request using Axios');
+    return await axios({
+      method: 'post',
+      url: url,
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+      .then(res => {
+        console.log('Successful response.');
+        console.log(`statusCode: ${res.statusCode}`);
+        // console.log(res.data);
+        return res.data.image;
+      })
+      .catch(error => {
+        console.log('Something went wrong.');
+        console.error(error);
+        stepsHeaderSetStati([stepsHeaderStati[0], 'error', stepsHeaderStati[2]]);
+        stepsHeaderSetSubTitles([stepsHeaderSubTitles[0], <>Error.</>, stepsHeaderSubTitles[2]])
+        stepsHeaderSetDescriptions([stepsHeaderDescriptions[0], <>Response error.<br />{error.message}</>, stepsHeaderDescriptions[2]])
+      });
+  }
+  const postImageToImgur = async base64 => {
+    // API authorisation
+    console.log(base64);
+    const clientId = "0625afff3ad4ce4";
+    const Auth = "Client-ID " + clientId;
+    // const base64Response = await fetch(`data:image/jpg;base64,${base64}`);
+    const base64Response = await fetch(base64);
+    const base64Blob = await base64Response.blob();
+    // console.log(base64Blob);
+    const formData = new FormData();
+    formData.append("image", base64Blob, "coursework.jpg");
+    // Imgur Upload Image Endpoint
+    // Send POST request.
+    return await axios({
+      method: 'post',
+      url: "https://api.imgur.com/3/image/",
+      data: formData,
+      headers: {
+         'Authorization': Auth,
+         "Accept": "application/json",
+         'Content-Type': 'multipart/form-data' 
+        },
+    })
+    // return await fetch("https://api.imgur.com/3/image/", {
+    //   method: "POST",
+    //   body: formData,
+    //   headers: {
+    //     "Authorization": Auth,
+    //     "Accept": "application/json",
+    //     // "Content-Type": 'multipart/form-data', 
+    //   },
+      // form: {
+      //   "image": base64,
+      //   "type": "base64",
+      // }
+    // })
+      .then( res => {
+        console.log('successful response.');
+        console.log(`statusCode: ${res.data.statusCode}`);
+        console.log(`res.data.data ${res.data.data}`);
+        console.log(`res.data.data.link ${res.data.data.link}`);
+        setImageResultArray([imageResultArray[0], imageResultArray[1], res.data.data.link]);
+        stepsHeaderSetStati([stepsHeaderStati[0], stepsHeaderStati[1], 'finish']);
+        stepsHeaderSetSubTitles([stepsHeaderSubTitles[0], stepsHeaderSubTitles[1], <>Success.</>]);
+        stepsHeaderSetDescriptions([stepsHeaderDescriptions[0], stepsHeaderDescriptions[1],
+        <>
+          <p>Hosted on Imgur:</p>
+          <img src={res.data.data.link} width={700} />
+        </>]);
+        return res.data.data.link;
+      })
+      .catch(error => {
+        console.log('Something went wrong.');
+        console.error(error.message);
+      });
+    }
 
   // Button Handlers:
+  //
   const fetchButtonHandler = () => {
+    // currentStep indicates which tab we have selected.
     switch (currentStep) {
       case 0: fetchFromWS1(); break;
       case 1: fetchFromWS2(); break;
@@ -121,21 +176,23 @@ function App({themeColour, themeTime, easeRatio}) {
     console.log('Submitting images for post-processing.');
     let newBase64 = await postBase64AsFormData(imageResultArray[0], `http://localhost:3001/edgedetect`);
     console.log('new base 64');
-    console.log(newBase64);
+    // console.log(newBase64);
     setImageResultArray([imageResultArray[0], newBase64, imageResultArray[2]]);
     stepsHeaderSetStati([stepsHeaderStati[0], 'finish', stepsHeaderStati[2]]);
-    stepsHeaderSetSubTitles([stepsHeaderSubTitles[0], <>Success.</>, stepsHeaderSubTitles[2]])
+    stepsHeaderSetSubTitles([stepsHeaderSubTitles[0], <>Success.</>, stepsHeaderSubTitles[2]]);
     stepsHeaderSetDescriptions([stepsHeaderDescriptions[0], <>
         <p>Response data:</p>
         <img src={newBase64} width={700} />
     </>, stepsHeaderDescriptions[2]]);
-    // Post image to WS2
+    stepsHeaderSetDisabled([false, false, false]);
   };
-  const fetchFromWS3 = () => {
+  const fetchFromWS3 = async () => {
+    console.log('going to post current image to imgur api');
     stepsHeaderSetStati([stepsHeaderStati[0], stepsHeaderStati[1], 'process']);
-    console.log('gettingMarsImages');
-    stepsHeaderSetSubTitles([<>Working..</>, stepsHeaderSubTitles[1], stepsHeaderSubTitles[2]])
-    stepsHeaderSetDescriptions([<><Spin/></>, stepsHeaderDescriptions[1], stepsHeaderDescriptions[2]])
+    stepsHeaderSetSubTitles([stepsHeaderSubTitles[0], stepsHeaderSubTitles[1], <>Working..</>]);
+    stepsHeaderSetDescriptions([stepsHeaderDescriptions[0], stepsHeaderDescriptions[1], <><Spin/></>]);
+    let returnURL = await postImageToImgur(imageResultArray[1]);
+    console.log(`got ${returnURL}`);
   };
 
   // Handle step / tab change.
