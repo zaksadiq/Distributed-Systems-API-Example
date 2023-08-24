@@ -1,6 +1,11 @@
 # Distributed Systems CW2
 
+## Demonstration
+
 ## Architecture
+1. Web Client - Node.js + React.
+2. Web Server 1: Python Flask.
+3. Web Server 2: Node.js + Express.
 
 ## Web Client
 Implemented as a pair.
@@ -30,7 +35,8 @@ Description: Takes ... and ...
 |-------------|--------------|----------------------------------------------------|
 | /           | GET          | Returns a JSON object of 'Hello World'.            |
 | /edgeDetect | POST         | Upload an image for the purpose of edge detection. |
-|             | GET          | Get an image possible                              |
+|..To Complete| GET          | Get an image possible                              |
 
 
 ## Web Service 3
+Exterrnal API : Imgur.com. Used for file upload to demonstrate connection to external service.
