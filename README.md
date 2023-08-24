@@ -1,7 +1,7 @@
 # Distributed Systems CW2
 
 ## Demonstration
-Viewable at ./Demonstration.mp4
+Full video viewable at ./Demonstration.mp4
 
 ### Samples from the demonstration video:
 https://github.com/zaksadiq/Distributed-Systems-API-Example/assets/16501767/e15abac9-3be3-4d49-bff9-fa19eb5ee44e
