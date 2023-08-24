@@ -3,8 +3,14 @@
 ## Demonstration
 Viewable at ./Demonstration.mp4
 
-### Sample of the demonstration video:
+### Samples from the demonstration video:
 https://github.com/zaksadiq/Distributed-Systems-API-Example/assets/16501767/e15abac9-3be3-4d49-bff9-fa19eb5ee44e
+
+![image](https://github.com/zaksadiq/Distributed-Systems-API-Example/assets/16501767/3d8a3c09-a324-4c98-8a84-d4d1dd2b6ee4)
+
+![image](https://github.com/zaksadiq/Distributed-Systems-API-Example/assets/16501767/be7259b1-30e3-4c8b-9f10-261890d5eeb4)
+
+![image](https://github.com/zaksadiq/Distributed-Systems-API-Example/assets/16501767/da264be4-4376-4126-814c-b4619b205f69)
 
 
 
