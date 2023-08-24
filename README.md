@@ -1,7 +1,7 @@
 # Distributed Systems CW2
 
 ## Demonstration
-Viewable at ./Demonstration.mp4
+Viewable at ./Demonstration.mp4 (It's worth the download.)
 
 ## Architecture
 1. Web Client - Node.js + React.
