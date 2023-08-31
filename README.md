@@ -1,5 +1,5 @@
 # Distributed Systems CW2
-Example web servers and web client to demonstrate REST principles and daisy-chaining of API calls. Gets random mars image, performs an edge-detection algorithm (Canny), and then uploads the image to the Internet, providing the upload URL. 
+Example web servers and web client to demonstrate REST principles and daisy-chaining of API calls. Gets random NASA Curiosity Mars Rover image, performs an edge-detection algorithm (Canny), and then uploads the image to the Internet, providing the upload URL. 
 
 ## Demonstration
 Full video viewable at ./Demonstration.mp4
